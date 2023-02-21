@@ -1,3 +1,5 @@
+import ProductForm from '@/components/ProductForm'
+import ProductList from '@/components/ProductList'
 import Head from 'next/head'
 
 export default function Home() {
@@ -15,6 +17,18 @@ export default function Home() {
         <button className='px-4 py-2 rounded-md bg-purple-900 text-white font-semibold hover:opacity-90 transition-all'>
           Logar com google
         </button>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
+          <ProductForm />
+          <div className='space-y-4'>
+            <h2 className='text-xl font-bold'>Lista de produtos</h2>
+
+            <div>
+              <ProductList />
+              <ProductList />
+              <ProductList />
+            </div>
+          </div>
+        </div>
       </main>
     </>
   )

@@ -11,7 +11,6 @@
 ##### Products
 
 - Nome
-- Descrição
 - Preço
 
 ---
