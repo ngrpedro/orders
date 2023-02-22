@@ -37,7 +37,7 @@ const Home = () => {
 
         {/* Todoos os produtos */}
         <div className='space-y-3'>
-          <h2>Todoos os produtos</h2>
+          <h2>Todos os produtos</h2>
           <div className=''>
             <ProductCard />
           </div>
