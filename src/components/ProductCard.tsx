@@ -1,16 +1,23 @@
 import { ShoppingCartSimple, Plus, Minus } from 'phosphor-react'
 import React from 'react'
 
-const ProductCard = () => {
+interface ProductProps {
+  id: string
+  name: string
+  price: number
+}
+
+const ProductCard = (product: ProductProps) => {
+  const { name, price } = product
   return (
-    <div className='space-y-2'>
+    <>
       <div className='grid grid-cols-3 gap-3 p-2 bg-neutral-800 rounded-md'>
         <span className='block rounded-lg bg-neutral-700 h-20'></span>
 
         <div className='col-span-2'>
           <div className='text-start'>
-            <span className='text-sm block'>Coca cola lata (330ml)</span>
-            <span className='text-sm block'>R$ 6,50</span>
+            <span className='text-sm block'>{name}</span>
+            <span className='text-sm block'>R$ {price /100},00</span>
           </div>
           <div className='flex flex-col items-end justify-center'>
             <button className='rounded-full border-2 border-neutral-300 p-2'>
@@ -20,7 +27,7 @@ const ProductCard = () => {
         </div>
       </div>
 
-      <div className='grid grid-cols-3 gap-3 p-2 bg-neutral-800 rounded-md'>
+      {/*       <div className='grid grid-cols-3 gap-3 p-2 bg-neutral-800 rounded-md'>
         <span className='block rounded-lg bg-neutral-700 h-20'></span>
 
         <div className='col-span-2'>
@@ -38,8 +45,8 @@ const ProductCard = () => {
             </button>
           </div>
         </div>
-      </div>
-    </div>
+      </div> */}
+    </>
   )
 }
 

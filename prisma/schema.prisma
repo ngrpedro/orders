@@ -10,7 +10,7 @@ datasource db {
 model Product {
   id    String @id @default(uuid())
   name  String
-  price Float
+  price Int
 
   orders          Order[]
   ProductsOnOrder ProductsOnOrder[]

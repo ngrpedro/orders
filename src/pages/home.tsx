@@ -1,8 +1,11 @@
 import ProductCard from '@/components/ProductCard'
+import { useProducts } from '@/context/ProductsContext'
 import Head from 'next/head'
 import React from 'react'
 
 const Home = () => {
+  const { products } = useProducts()
+
   return (
     <>
       <Head>
@@ -38,8 +41,10 @@ const Home = () => {
         {/* Todoos os produtos */}
         <div className='space-y-3'>
           <h2>Todos os produtos</h2>
-          <div className=''>
-            <ProductCard />
+          <div className='space-y-2'>
+            {products.map((product) => {
+              return <ProductCard key={product.id} {...product}/>
+            })}
           </div>
         </div>
       </main>

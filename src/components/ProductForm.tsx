@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 const ProductInputs = z.object({
   name: z.string(),
-  price: z.string(),
+  price: z.number(),
 })
 
 type ProductType = z.infer<typeof ProductInputs>
@@ -17,10 +17,10 @@ const ProductForm = () => {
     try {
       await api.post('products', {
         name: data.name,
-        price: data.price,
+        price: data.price * 100,
       })
     } catch (error) {
-      //console.log(error)
+      console.log(error)
     }
   }
 
@@ -31,17 +31,18 @@ const ProductForm = () => {
         <span className='text-base font-semibold block'>Nome</span>
         <input
           type='text'
-          className='px-4 py-2 rounded-md w-full'
+          className='px-4 py-2 rounded-md w-full bg-neutral-700'
           {...register('name')}
         />
       </label>
 
       <label className='block space-y-1'>
         <span className='text-base font-semibold block'>Preço</span>
+
         <input
-          type='text'
-          className='px-4 py-2 rounded-md w-full'
-          {...register('price')}
+          type='number'
+          className='px-4 py-2 rounded-md w-full bg-neutral-700'
+          {...register('price', { valueAsNumber: true })}
         />
       </label>
 
