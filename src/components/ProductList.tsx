@@ -9,7 +9,7 @@ interface Product {
 
 const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([])
-  console.log(products)
+  //console.log(products)
 
   const findManyProducts = async () => {
     const prods = await api.get('/products')

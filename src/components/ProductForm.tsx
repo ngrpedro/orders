@@ -20,7 +20,7 @@ const ProductForm = () => {
         price: data.price,
       })
     } catch (error) {
-      console.log(error)
+      //console.log(error)
     }
   }
 

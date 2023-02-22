@@ -12,7 +12,43 @@ model Product {
   name  String
   price Float
 
+  orders          Order[]
+  ProductsOnOrder ProductsOnOrder[]
+
   @@map("products")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+
+  orders Order[]
+
+  @@map("users")
+}
+
+model Order {
+  id              String            @id @default(cuid())
+  userId          String
+  user            User              @relation(fields: [userId], references: [id])
+  products        Product[]
+  ProductsOnOrder ProductsOnOrder[]
+
+  createdAt DateTime @default(now())
+}
+
+model ProductsOnOrder {
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+
+  @@id([orderId, productId])
 }
 
 model Account {
@@ -43,18 +79,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
-}
-
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-
-  @@map("users")
 }
 
 model VerificationToken {
