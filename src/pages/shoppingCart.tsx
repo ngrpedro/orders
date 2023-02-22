@@ -1,5 +1,6 @@
 import ProductCard from '@/components/ProductCard'
 import Head from 'next/head'
+import { WhatsappLogo } from 'phosphor-react'
 import React from 'react'
 
 const ShoppingCart = () => {
@@ -44,8 +45,9 @@ const ShoppingCart = () => {
         </div>
 
         <div>
-          <button className='px-4 py-2 bg-green-600 text-white font-semibold w-full rounded-md'>
-            Confirmar pedido
+          <button className='px-4 py-2 bg-green-600 text-white font-semibold w-full 
+                rounded-md flex items-center justify-center gap-2'>
+            Confirmar pedido <WhatsappLogo size={22} />
           </button>
         </div>
       </div>
