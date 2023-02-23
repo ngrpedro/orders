@@ -7,7 +7,7 @@ interface Product {
   price: number
 }
 
-interface ProdcutContext {
+interface ProductContext {
   products: Product[]
   findManyProducts: () => void
 }
@@ -16,7 +16,7 @@ interface ProductsProviderProps {
   children: ReactNode
 }
 
-const ProductsContext = createContext({} as ProdcutContext)
+const ProductsContext = createContext({} as ProductContext)
 
 export function useProducts() {
   return useContext(ProductsContext)

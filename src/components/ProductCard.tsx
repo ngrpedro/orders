@@ -1,3 +1,4 @@
+import { useShoppingCart } from '@/context/ShoppingCartContext'
 import { ShoppingCartSimple, Plus, Minus } from 'phosphor-react'
 import React from 'react'
 
@@ -8,6 +9,7 @@ interface ProductProps {
 }
 
 const ProductCard = (product: ProductProps) => {
+  const { cartProducts } = useShoppingCart()
   const { name, price } = product
   return (
     <>
@@ -17,7 +19,7 @@ const ProductCard = (product: ProductProps) => {
         <div className='col-span-2'>
           <div className='text-start'>
             <span className='text-sm block'>{name}</span>
-            <span className='text-sm block'>R$ {price /100},00</span>
+            <span className='text-sm block'>R$ {price / 100},00</span>
           </div>
           <div className='flex flex-col items-end justify-center'>
             <button className='rounded-full border-2 border-neutral-300 p-2'>
