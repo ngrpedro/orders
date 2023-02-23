@@ -6,6 +6,6 @@
 
 @layer base {
   body {
-    @apply font-poppins bg-neutral-900 text-white;
+    @apply !font-poppins !bg-neutral-900 !text-white;
   }
 }

@@ -33,6 +33,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     []
   )
 
+  //console.log(cartProducts)
+
   let totalQuantify = 0
   let totalAmount = 0
 
@@ -106,7 +108,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     let newList = newProduct.filter((item) => item.quantify != 0)
     setCartProducts(newList)
   }
-  
+
   function deleteCart() {}
 
   return (

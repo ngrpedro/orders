@@ -47,13 +47,13 @@ const ProductCard = (product: ProductProps) => {
   return (
     <>
       <div className='grid grid-cols-3 gap-3 p-2 bg-neutral-800 rounded-md'>
-        <span className='block rounded-lg bg-neutral-700 h-20'></span>
+        <span className='block rounded-lg bg-neutral-700'></span>
 
         <div className='col-span-2'>
           <div className="flex items-start justify-between">
             <div className='text-start'>
-              <span className='text-sm block'>{name}</span>
-              <span className='text-sm block'>R$ {price / 100},00</span>
+              <span className='text-sm md:text-base block'>{name}</span>
+              <span className='text-sm md:text-base block'>R$ {price / 100},00</span>
             </div>
 
             {actualProduct?.amount === undefined ? (
@@ -111,26 +111,6 @@ const ProductCard = (product: ProductProps) => {
           )}
         </div>
       </div>
-
-      {/*       <div className='grid grid-cols-3 gap-3 p-2 bg-neutral-800 rounded-md'>
-        <span className='block rounded-lg bg-neutral-700 h-20'></span>
-
-        <div className='col-span-2'>
-          <div className='text-start'>
-            <span className='text-sm block'>Coca cola lata (330ml)</span>
-            <span className='text-sm block'>R$ 6,50</span>
-          </div>
-          <div className='flex items-center justify-end gap-3 mt-2'>
-            <button className='rounded-full border-2 border-neutral-300 p-1'>
-              <Plus size={18} />
-            </button>
-            <span>2</span>
-            <button className='rounded-full border-2 border-neutral-300 p-1'>
-              <Minus size={18} />
-            </button>
-          </div>
-        </div>
-      </div> */}
     </>
   )
 }

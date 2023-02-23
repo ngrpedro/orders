@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import * as Dialog from '@radix-ui/react-dialog'
+import { useShoppingCart } from '@/context/ShoppingCartContext'
 
 const AdreesPaymentType = z.object({
   cep: z.number().min(3),
