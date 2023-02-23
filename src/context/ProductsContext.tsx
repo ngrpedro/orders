@@ -2,7 +2,7 @@ import { api } from '@/lib/axios'
 import { createContext, ReactNode, useContext, useState, useEffect } from 'react'
 
 interface Product {
-  id: string
+  id: number
   name: string
   price: number
 }

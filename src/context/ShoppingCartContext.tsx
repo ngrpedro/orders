@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode } from 'react'
-import { useLocalStorage } from './../hooks/useLocalIstorage';
+import { useLocalStorage } from './../hooks/useLocalIstorage'
 
 interface CartProduct {
   productId: number
@@ -36,8 +36,77 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   let totalQuantify = 0
   let totalAmount = 0
 
-  function increaseCartItem(data: CartProduct) {}
-  function decreaseCartItem(data: CartProduct) {}
+  function increaseCartItem(data: CartProduct) {
+    const { productId, name, price } = data
+
+    const existingProduct = cartProducts.find(
+      (product) => productId === product.productId
+    )
+
+    const quantify = 1
+    const amount = price
+
+    const newProduct = {
+      productId,
+      name,
+      price,
+      quantify,
+      amount,
+    }
+
+    if (!existingProduct) {
+      setCartProducts((state) => [...state, newProduct])
+    } else {
+      const newProductArray = cartProducts.map((prod) => {
+        if (prod.productId === existingProduct?.productId) {
+          const quantify = prod.quantify! + 1
+          const amount = prod.price * quantify
+
+          return {
+            ...prod,
+            quantify,
+            amount,
+          }
+        } else {
+          return { ...prod }
+        }
+      })
+
+      setCartProducts(newProductArray)
+    }
+  }
+
+  function decreaseCartItem(data: CartProduct) {
+    const { productId, name, price } = data
+
+    const newProduct = cartProducts.map((product) => {
+      if (productId === product.productId && product.quantify! > 1) {
+        const quantify = product.quantify ? product.quantify - 1 : 0 - 1
+        const amount = product.price * quantify
+
+        return {
+          ...product,
+          quantify,
+          amount,
+        }
+      }
+      if (productId === product.productId && product.quantify === 1) {
+        return {
+          ...product,
+          quantify: 0,
+          amount: 0,
+        }
+      } else {
+        return {
+          ...product,
+        }
+      }
+    })
+
+    let newList = newProduct.filter((item) => item.quantify != 0)
+    setCartProducts(newList)
+  }
+  
   function deleteCart() {}
 
   return (
