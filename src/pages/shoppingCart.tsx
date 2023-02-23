@@ -2,8 +2,10 @@ import ProductCard from '@/components/ProductCard'
 import Head from 'next/head'
 import { WhatsappLogo } from 'phosphor-react'
 import React from 'react'
+import { useShoppingCart } from '@/context/ShoppingCartContext';
 
 const ShoppingCart = () => {
+  const {cartProducts} = useShoppingCart()
   return (
     <div>
       <Head>
@@ -12,8 +14,10 @@ const ShoppingCart = () => {
       <div className='space-y-8'>
         <div className='space-y-3'>
           <h2>Todos os produtos</h2>
-          <div className=''>
-            <ProductCard />
+          <div className='space-y-2'>
+          {cartProducts.map((product) => {
+              return <ProductCard id={product.productId} key={product.productId} {...product}/>
+            })}
           </div>
         </div>
 

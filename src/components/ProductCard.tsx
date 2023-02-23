@@ -43,16 +43,26 @@ const ProductCard = (product: ProductProps) => {
 
     decreaseCartItem(productToDecrease)
   }
-  
+
   return (
     <>
       <div className='grid grid-cols-3 gap-3 p-2 bg-neutral-800 rounded-md'>
         <span className='block rounded-lg bg-neutral-700 h-20'></span>
 
         <div className='col-span-2'>
-          <div className='text-start'>
-            <span className='text-sm block'>{name}</span>
-            <span className='text-sm block'>R$ {price / 100},00</span>
+          <div className="flex items-start justify-between">
+            <div className='text-start'>
+              <span className='text-sm block'>{name}</span>
+              <span className='text-sm block'>R$ {price / 100},00</span>
+            </div>
+
+            {actualProduct?.amount === undefined ? (
+              ''
+            ) : (
+              <p className='text-green-500'>
+                R$ {actualProduct.amount / 100},00
+              </p>
+            )}
           </div>
 
           {actualProduct?.quantify === undefined ? (
