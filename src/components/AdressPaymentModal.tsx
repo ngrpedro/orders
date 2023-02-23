@@ -1,15 +1,18 @@
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import React from 'react'
-import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'phosphor-react'
+import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import * as RadioGroup from '@radix-ui/react-radio-group'
+import * as Dialog from '@radix-ui/react-dialog'
 
 const AdreesPaymentType = z.object({
-  cep: z.number(),
-  rua: z.string(),
-  numero: z.number(),
-  bairro: z.string(),
+  cep: z.number().min(3),
+  rua: z.string().min(3),
+  numero: z.string().min(3),
+  bairro: z.string().min(3),
   complemento: z.string(),
+  paymentMode: z.enum(['pix', 'credito', 'debito']),
 })
 
 type AdressPaymentInputs = z.infer<typeof AdreesPaymentType>
@@ -18,10 +21,16 @@ const AdressPaymentModal = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
-  } = useForm<AdressPaymentInputs>()
+    reset,
+  } = useForm<AdressPaymentInputs>({
+    resolver: zodResolver(AdreesPaymentType),
+  })
 
-  const handleAdressPayment = (data: AdressPaymentInputs) => {}
+  const handleAdressPayment = (data: AdressPaymentInputs) => {
+    console.log(data)
+  }
   return (
     <Dialog.Portal>
       <Dialog.Overlay className='fixed w-screen h-screen inset-0 bg-black opacity-70' />
@@ -47,44 +56,104 @@ const AdressPaymentModal = () => {
           onSubmit={handleSubmit(handleAdressPayment)}
         >
           <div className='space-y-3'>
-            <input
-              {...register('cep', { valueAsNumber: true })}
-              className='bg-neutral-700 w-full rounded-md px-4 py-2'
-              type='number'
-              placeholder='CEP'
-              required
-            />
-            <input
-              {...register('rua')}
-              className='bg-neutral-700 w-full rounded-md px-4 py-2'
-              type='text'
-              placeholder='Rua'
-              required
-            />
-            <input
-              {...register('numero')}
-              className='bg-neutral-700 w-full rounded-md px-4 py-2'
-              type='number'
-              placeholder='Numero'
-              required
-            />
-            <input
-              {...register('bairro')}
-              className='bg-neutral-700 w-full rounded-md px-4 py-2'
-              type='text'
-              placeholder='Bairro'
-              required
-            />
-            <input
-              {...register('complemento')}
-              className='bg-neutral-700 w-full rounded-md px-4 py-2'
-              type='text'
-              placeholder='Complemento'
-              required
-            />
+            <div>
+              <input
+                {...register('cep', { valueAsNumber: true })}
+                className='bg-neutral-700 w-full rounded-md px-4 py-2'
+                type='number'
+                placeholder='CEP'
+              />
+              {errors.cep ? <small>CEP é obrigatório</small> : <small></small>}
+            </div>
+
+            <div>
+              <input
+                {...register('rua')}
+                className='bg-neutral-700 w-full rounded-md px-4 py-2'
+                type='text'
+                placeholder='Rua'
+              />
+              {errors.rua ? <small>Rua é obrigatório</small> : <small></small>}
+            </div>
+            <div>
+              <input
+                {...register('numero')}
+                className='bg-neutral-700 w-full rounded-md px-4 py-2'
+                type='text'
+                placeholder='Numero'
+              />
+
+              {errors.numero ? (
+                <small>Número é obrigatório</small>
+              ) : (
+                <small></small>
+              )}
+            </div>
+
+            <div>
+              <input
+                {...register('bairro')}
+                className='bg-neutral-700 w-full rounded-md px-4 py-2'
+                type='text'
+                placeholder='Bairro'
+              />
+              {errors.bairro ? (
+                <small>Bairro é obrigatório</small>
+              ) : (
+                <small></small>
+              )}
+            </div>
+
+            <div>
+              <input
+                {...register('complemento')}
+                className='bg-neutral-700 w-full rounded-md px-4 py-2'
+                type='text'
+                placeholder='Complemento'
+              />
+            </div>
           </div>
 
-          <button className='px-4 py-2 bg-blue-800 text-white font-semibold w-full rounded-md'>
+          <div>
+            <Controller
+              name='paymentMode'
+              control={control}
+              render={({ field }) => {
+                return (
+                  <RadioGroup.Root
+                    defaultValue='pix'
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    className='flex items-start justify-center gap-2'
+                  >
+                    <RadioGroup.Item
+                      value={'pix'}
+                      className='px-4 py-3 bg-purple-800 opacity-30 rounded-md w-full aria-checked:opacity-90'
+                    >
+                      Pix
+                    </RadioGroup.Item>
+
+                    <RadioGroup.Item
+                      value={'credito'}
+                      className='px-4 py-3 bg-purple-800 opacity-30 rounded-md w-full aria-checked:opacity-90'
+                    >
+                      Crédito
+                    </RadioGroup.Item>
+
+                    <RadioGroup.Item
+                      value={'debito'}
+                      className='px-4 py-3 bg-purple-800 opacity-30 rounded-md w-full aria-checked:opacity-90'
+                    >
+                      Débito
+                    </RadioGroup.Item>
+                  </RadioGroup.Root>
+                )
+              }}
+            />
+            <small>Selecione a forma de pagamento</small>
+          </div>
+
+          <button className='px-4 py-2 bg-green-800 text-white font-semibold w-full rounded-md'>
             Confirmar
           </button>
         </form>
