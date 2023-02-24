@@ -33,8 +33,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     []
   )
 
-  //console.log(cartProducts)
-
   let totalQuantify = 0
   let totalAmount = 0
 

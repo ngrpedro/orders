@@ -10,7 +10,7 @@ const ShoppingCartModal = () => {
   const { cartProducts } = useShoppingCart()
   const { products } = useProducts()
 
-  console.log('ShoppingCartModal' + products)
+  console.log('ShoppingCartModal ' + products)
 
   return (
     <Dialog.Portal>
