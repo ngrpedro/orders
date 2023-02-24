@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import * as Dialog from '@radix-ui/react-dialog'
 import Link from 'next/link'
 import ShoppingCartModal from '../ShoppingCartModal'
+import { useShoppingCart } from '@/context/ShoppingCartContext'
 
 interface LayoutProps {
   children: ReactNode
@@ -34,14 +35,22 @@ const Layout = ({ children }: LayoutProps) => {
               className={router.pathname === '/profile' ? 'text-green-700' : ''}
             />
           </Link>
+          <Link href={'/shoppingCart'}>
+            <ShoppingCart
+              className={
+                router.pathname === '/shoppingCart' ? 'text-green-700' : ''
+              }
+              size={32}
+            />
+          </Link>
 
-          <Dialog.Root>
+          {/*  <Dialog.Root>
             <Dialog.Trigger>
               <ShoppingCart size={32} />
             </Dialog.Trigger>
 
             <ShoppingCartModal />
-          </Dialog.Root>
+          </Dialog.Root> */}
         </div>
       </nav>
 

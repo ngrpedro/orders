@@ -32,11 +32,12 @@ const AdressPaymentModal = () => {
   const handleAdressPayment = (data: AdressPaymentInputs) => {
     console.log(data)
   }
+
   return (
     <Dialog.Portal>
       <Dialog.Overlay className='fixed w-screen h-screen inset-0 bg-black opacity-70' />
       <Dialog.Content
-        className='bg-zinc-800 max-w-[320px] w-full rounded-sm'
+        className='bg-zinc-800 max-w-[650px] w-full rounded-sm'
         style={{
           position: 'fixed',
           top: '50%',
@@ -56,7 +57,7 @@ const AdressPaymentModal = () => {
           className='space-y-8 p-4'
           onSubmit={handleSubmit(handleAdressPayment)}
         >
-          <div className='space-y-3'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3'>
             <div>
               <input
                 {...register('cep', { valueAsNumber: true })}
@@ -67,7 +68,7 @@ const AdressPaymentModal = () => {
               {errors.cep ? <small>CEP é obrigatório</small> : <small></small>}
             </div>
 
-            <div>
+            <div className='sm:col-span-2 md:col-span-3'>
               <input
                 {...register('rua')}
                 className='bg-neutral-700 w-full rounded-md px-4 py-2'
@@ -76,6 +77,7 @@ const AdressPaymentModal = () => {
               />
               {errors.rua ? <small>Rua é obrigatório</small> : <small></small>}
             </div>
+
             <div>
               <input
                 {...register('numero')}
@@ -91,7 +93,7 @@ const AdressPaymentModal = () => {
               )}
             </div>
 
-            <div>
+            <div className='sm:col-span-2 md:col-span-2'>
               <input
                 {...register('bairro')}
                 className='bg-neutral-700 w-full rounded-md px-4 py-2'
@@ -105,7 +107,7 @@ const AdressPaymentModal = () => {
               )}
             </div>
 
-            <div>
+            <div className='sm:col-span-2 md:col-span-3'>
               <input
                 {...register('complemento')}
                 className='bg-neutral-700 w-full rounded-md px-4 py-2'
