@@ -73,17 +73,8 @@ const ShoppingCart = () => {
       Entrega: *R$3,00*
       Total do pedido: *${totalOrderAmountFormatterdPlusTax}*
     `
-    whatsappOrder = window.encodeURIComponent(whatsappOrder);
-
-
-    var texto = "Texto que eu vou enviar \n com quebras de \n texto.";
-    texto = window.encodeURIComponent(texto);
-
-    const url = `https://web.whatsapp.com/send?phone=5518997153884&text=${whatsappOrder}&app_absent=0`
-
+    const url = `https://wa.me/5518997153884?text=${encodeURI(whatsappOrder)}`
     window.open(url)
-
-    console.log(whatsappOrder)
   }
 
   return (

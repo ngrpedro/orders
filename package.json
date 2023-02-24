@@ -29,6 +29,7 @@
     "react-hook-form": "^7.43.1",
     "react-input-mask": "^2.0.4",
     "react-router-dom": "^6.8.1",
+    "react-whatsapp": "^0.3.0",
     "typescript": "4.9.5",
     "zod": "^3.20.6"
   },

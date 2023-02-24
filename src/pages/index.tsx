@@ -2,6 +2,7 @@ import ProductForm from '@/components/ProductForm'
 import ProductList from '@/components/ProductList'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Head from 'next/head'
+import ReactWhatsapp from 'react-whatsapp'
 
 export default function Home() {
   const { data: session } = useSession()
