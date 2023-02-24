@@ -3,7 +3,6 @@ import Head from 'next/head'
 import { WhatsappLogo } from 'phosphor-react'
 import React from 'react'
 import { useShoppingCart } from '@/context/ShoppingCartContext'
-import * as Dialog from '@radix-ui/react-dialog'
 import AdressPaymentModal from '@/components/AdressPaymentModal'
 import { priceFormatter } from '@/utils/formatter'
 import * as z from 'zod'
@@ -13,6 +12,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft } from 'phosphor-react'
 import logo from '../assets/shopping-cart-empty.png'
+import { useRouter } from 'next/router'
 
 const AdreesPaymentType = z.object({
   cep: z.number().min(3),
@@ -30,7 +30,8 @@ const ShoppingCart = () => {
     resolver: zodResolver(AdreesPaymentType),
   })
 
-  const { cartProducts } = useShoppingCart()
+  const { cartProducts, deleteCart } = useShoppingCart()
+  const router = useRouter()
 
   const totalOrderAmount = cartProducts.reduce(
     (totalAmount, prod) => totalAmount + prod.amount!,
@@ -78,7 +79,10 @@ Entrega: *R$3,00*
 Total do pedido: *${totalOrderAmountFormatterdPlusTax}*
 `
     const url = `https://wa.me/5518997153884?text=${encodeURI(whatsappOrder)}`
+    
     window.open(url)
+    router.push('/home')
+    deleteCart()
   }
 
   return (
@@ -103,10 +107,7 @@ Total do pedido: *${totalOrderAmountFormatterdPlusTax}*
           </div>
         </>
       ) : (
-        <form
-          className='space-y-8'
-          onSubmit={newCartForm.handleSubmit(onSubmit)}
-        >
+        <div className='space-y-8'>
           <div className='space-y-3'>
             <h2 className='text-xl font-bold'>Todos os produtos</h2>
 
@@ -146,14 +147,14 @@ Total do pedido: *${totalOrderAmountFormatterdPlusTax}*
 
           <div>
             <button
-              type='submit'
+              onClick={newCartForm.handleSubmit(onSubmit)}
               className='px-4 py-2 bg-green-600 text-white font-semibold w-full 
                 rounded-md flex items-center justify-center gap-2'
             >
               Confirmar pedido <WhatsappLogo size={22} />
             </button>
           </div>
-        </form>
+        </div>
       )}
     </div>
   )

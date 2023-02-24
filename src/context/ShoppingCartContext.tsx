@@ -112,7 +112,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     setCartProducts(newList)
   }
 
-  function deleteCart() {}
+  function deleteCart() {
+    setCartProducts([])
+  }
 
   return (
     <ShoppingCartContext.Provider

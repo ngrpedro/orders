@@ -1,11 +1,16 @@
 import React, { ReactNode } from 'react'
-import { User, ShoppingCart, House,InstagramLogo,
-  FacebookLogo } from 'phosphor-react'
+import {
+  User,
+  ShoppingCart,
+  House,
+  InstagramLogo,
+  FacebookLogo,
+} from 'phosphor-react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../assets/beer-logo.png'
-import { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react'
 
 interface LayoutProps {
   children: ReactNode
@@ -14,8 +19,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const router = useRouter()
 
-  const {status} = useSession()
-  console.log(status)
+  const { status } = useSession()
 
   return (
     <>
@@ -33,7 +37,7 @@ const Layout = ({ children }: LayoutProps) => {
               }
             >
               <House
-              weight="fill"
+                weight='fill'
                 size={28}
                 className={router.pathname === '/home' ? 'text-green-500' : ''}
               />
@@ -41,7 +45,7 @@ const Layout = ({ children }: LayoutProps) => {
           </Link>
           <Link href={'/shoppingCart'}>
             <ShoppingCart
-              weight="fill"
+              weight='fill'
               className={
                 router.pathname === '/shoppingCart' ? 'text-green-500' : ''
               }
@@ -49,17 +53,11 @@ const Layout = ({ children }: LayoutProps) => {
             />
           </Link>
           <Link href={'/profile'}>
-
-
-
             <User
-              weight="fill"
+              weight='fill'
               size={28}
               className={router.pathname === '/profile' ? 'text-green-500' : ''}
             />
-
-
-
           </Link>
         </div>
       </nav>
