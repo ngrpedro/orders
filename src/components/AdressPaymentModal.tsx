@@ -10,12 +10,10 @@ const AdressPaymentModal = () => {
     register,
     formState: { errors },
   } = useFormContext()
-
+  console.log(errors.paymentMode)
   return (
     <>
-        <h2 className='text-xl font-bold'>
-          Detalhes de endereço
-        </h2>
+      <h2 className='text-xl font-bold'>Detalhes de endereço</h2>
       <div className='space-y-8'>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3'>
           <div>
@@ -78,7 +76,7 @@ const AdressPaymentModal = () => {
         </div>
 
         <div>
-        <h2 className='text-xl font-bold mb-6'>Pagamento</h2>
+          <h2 className='text-xl font-bold mb-6'>Pagamento</h2>
 
           <Controller
             name='paymentMode'
@@ -86,7 +84,6 @@ const AdressPaymentModal = () => {
             render={({ field }) => {
               return (
                 <RadioGroup.Root
-                  defaultValue='pix'
                   onValueChange={field.onChange}
                   value={field.value}
                   className='flex items-start justify-center gap-2'
@@ -115,7 +112,11 @@ const AdressPaymentModal = () => {
               )
             }}
           />
-          <small>Selecione a forma de pagamento</small>
+                      {errors.paymentMode ? (
+              <small className="text-red-500">Forma de pagamento é obrigatório</small>
+            ) : (
+              <small>Selecione a forma de pagamento</small>
+            )}
         </div>
       </div>
     </>
