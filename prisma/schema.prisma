@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Product {
@@ -40,6 +41,8 @@ model Order {
   ProductsOnOrder ProductsOnOrder[]
 
   createdAt DateTime @default(now())
+
+  @@index([userId])
 }
 
 model ProductsOnOrder {
@@ -49,6 +52,8 @@ model ProductsOnOrder {
   order     Order   @relation(fields: [orderId], references: [id])
 
   @@id([orderId, productId])
+  @@index([orderId])
+  @@index([productId])
 }
 
 model Account {
@@ -68,6 +73,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
   @@map("accounts")
 }
 
@@ -78,6 +84,7 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@index([userId])
   @@map("sessions")
 }
 
