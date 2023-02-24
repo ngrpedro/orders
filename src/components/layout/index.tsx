@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react'
-import { User, ShoppingCart, House } from 'phosphor-react'
+import { User, ShoppingCart, House,InstagramLogo,
+  FacebookLogo } from 'phosphor-react'
 import { useRouter } from 'next/router'
-import * as Dialog from '@radix-ui/react-dialog'
 import Link from 'next/link'
-import ShoppingCartModal from '../ShoppingCartModal'
-import { useShoppingCart } from '@/context/ShoppingCartContext'
+import Image from 'next/image'
+import logo from '../../assets/beer-logo.png'
+import { useSession } from 'next-auth/react';
 
 interface LayoutProps {
   children: ReactNode
@@ -13,10 +14,15 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const router = useRouter()
 
+  const {status} = useSession()
+  console.log(status)
+
   return (
     <>
-      <nav className='w-full bg-neutral-700 px-8 py-6 flex items-center justify-between'>
-        <p>Logo</p>
+      <nav className='w-full bg-neutral-800 px-8 py-3 flex items-center justify-between'>
+        <Link href='/'>
+          <Image src={logo} width={40} height={40} alt='' />
+        </Link>
         <div className='flex items-center justify-center gap-3'>
           <Link href={'/home'}>
             <p
@@ -27,40 +33,42 @@ const Layout = ({ children }: LayoutProps) => {
               }
             >
               <House
-                size={32}
-                className={router.pathname === '/home' ? 'text-green-700' : ''}
+              weight="fill"
+                size={28}
+                className={router.pathname === '/home' ? 'text-green-500' : ''}
               />
             </p>
           </Link>
           <Link href={'/shoppingCart'}>
             <ShoppingCart
+              weight="fill"
               className={
-                router.pathname === '/shoppingCart' ? 'text-green-700' : ''
+                router.pathname === '/shoppingCart' ? 'text-green-500' : ''
               }
-              size={32}
+              size={28}
             />
           </Link>
           <Link href={'/profile'}>
+
+
+
             <User
-              size={32}
-              className={router.pathname === '/profile' ? 'text-green-700' : ''}
+              weight="fill"
+              size={28}
+              className={router.pathname === '/profile' ? 'text-green-500' : ''}
             />
+
+
+
           </Link>
-
-          {/*  <Dialog.Root>
-            <Dialog.Trigger>
-              <ShoppingCart size={32} />
-            </Dialog.Trigger>
-
-            <ShoppingCartModal />
-          </Dialog.Root> */}
         </div>
       </nav>
 
       <div className='max-w-[1100px] m-auto px-4 py-8'>{children}</div>
 
-      <footer className='w-full bg-neutral-800 px-4 py-4 flex items-center justify-center h-36 mt-10 text-2xl font-semibold'>
-        Oorders!!
+      <footer className=' w-full bg-neutral-800 px-4 py-4 flex items-center justify-center gap-5 mt-10 text-2xl font-semibold'>
+        <InstagramLogo size={32} />
+        <FacebookLogo size={32} />
       </footer>
     </>
   )

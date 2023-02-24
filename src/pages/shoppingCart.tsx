@@ -1,7 +1,7 @@
 import ProductCard from '@/components/ProductCard'
 import Head from 'next/head'
 import { WhatsappLogo } from 'phosphor-react'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useShoppingCart } from '@/context/ShoppingCartContext'
 import * as Dialog from '@radix-ui/react-dialog'
 import AdressPaymentModal from '@/components/AdressPaymentModal'
@@ -9,6 +9,10 @@ import { priceFormatter } from '@/utils/formatter'
 import * as z from 'zod'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowLeft } from 'phosphor-react'
+import logo from '../assets/shopping-cart-empty.png'
 
 const AdreesPaymentType = z.object({
   cep: z.number().min(3),
@@ -84,8 +88,18 @@ Total do pedido: *${totalOrderAmountFormatterdPlusTax}*
       </Head>
       {cartProducts.length === 0 ? (
         <>
-          <div className='h-[60vh]'>
-            O carrinho está vazio, volte e escolha alguns produtos
+          <div className='h-[75vh] flex flex-col items-center justify-center gap-8'>
+            <Image src={logo} width={200} height={200} alt='' />
+            <h1 className='text-xl font-bold text-center'>
+              Seu carrinho está vazio! Veja nossos produtos
+            </h1>
+            <Link
+              href={'/home'}
+              className='flex items-center justify-center gap-2 font-bold  text-green-500'
+            >
+              <ArrowLeft size={22} />
+              Ver Produtos
+            </Link>
           </div>
         </>
       ) : (
