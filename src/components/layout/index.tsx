@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { User, ShoppingCart } from 'phosphor-react'
+import { User, ShoppingCart, House } from 'phosphor-react'
 import { useRouter } from 'next/router'
 import * as Dialog from '@radix-ui/react-dialog'
 import Link from 'next/link'
@@ -26,14 +26,11 @@ const Layout = ({ children }: LayoutProps) => {
                   : 'font-semibold'
               }
             >
-              Inicio
+              <House
+                size={32}
+                className={router.pathname === '/home' ? 'text-green-700' : ''}
+              />
             </p>
-          </Link>
-          <Link href={'/profile'}>
-            <User
-              size={32}
-              className={router.pathname === '/profile' ? 'text-green-700' : ''}
-            />
           </Link>
           <Link href={'/shoppingCart'}>
             <ShoppingCart
@@ -41,6 +38,12 @@ const Layout = ({ children }: LayoutProps) => {
                 router.pathname === '/shoppingCart' ? 'text-green-700' : ''
               }
               size={32}
+            />
+          </Link>
+          <Link href={'/profile'}>
+            <User
+              size={32}
+              className={router.pathname === '/profile' ? 'text-green-700' : ''}
             />
           </Link>
 
