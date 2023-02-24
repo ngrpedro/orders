@@ -74,7 +74,7 @@ const Profile = () => {
 
   return (
     <div className='flex items-center justify-center h-[75vh]'>
-      <button /* onClick={() => signIn('google')} */>Logar</button>
+      <button onClick={() => signIn('google')}>Logar</button>
     </div>
   )
 }
