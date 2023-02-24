@@ -44,39 +44,44 @@ const ShoppingCart = () => {
   const onSubmit = (data: AdressPaymentInputs) => {
     const { bairro, cep, complemento, numero, paymentMode, rua } = data
 
-    const whatsappOrder = `
+    let whatsappOrder = `
       Novo pedido: 
 
-      * Endereço 
+      *Endereço* 
       Rua: ${rua}
       Numero: ${numero}
       Bairro : ${bairro}
       Complemento: ${complemento}
 
 
-      * Produtos
+      *Produtos*
      ${cartProducts.map(
        (prod) => `
         Nome: ${prod.name}
         Quantidade: ${prod.quantify}
         Preço: ${prod.price / 100},00
         Preço total: ${prod.amount! / 100},00
-        ---`
+        `
      )}
 
 
-      * Forma de pagamento
+      *Forma de pagamento*
       Pagamento: ${paymentMode}
 
 
-      Total dos produtos: ${totalOrderAmountFormatted}
-      Entrega: R$3,00
-      Total do pedido: ${totalOrderAmountFormatterdPlusTax}
+      Total dos produtos: "${totalOrderAmountFormatted}*
+      Entrega: *R$3,00*
+      Total do pedido: *${totalOrderAmountFormatterdPlusTax}*
     `
+    whatsappOrder = window.encodeURIComponent(whatsappOrder);
+
+
+    var texto = "Texto que eu vou enviar \n com quebras de \n texto.";
+    texto = window.encodeURIComponent(texto);
 
     const url = `https://web.whatsapp.com/send?phone=5518997153884&text=${whatsappOrder}&app_absent=0`
 
-    //window.open(url)
+    window.open(url)
 
     console.log(whatsappOrder)
   }
