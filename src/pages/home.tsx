@@ -15,13 +15,14 @@ const Home = () => {
       <main className='space-y-5 md:space-y-10'>
         {/* Carrousel */}
         <div className=''>
-          <div className='bg-neutral-700 h-32 md:h-72 rounded-md'></div>
+          <div className='bg-neutral-700 h-56 md:h-72 rounded-md'></div>
         </div>
 
         {/* Categories */}
         <div className='space-y-3'>
           <h2 className="md:text-2xl font-semibold">Categorias</h2>
-          <div className='grid grid-cols-4 md:grid-cols-8 gap-2'>
+          <div className='grid grid-cols-5 md:grid-cols-9 gap-2'>
+            <span className='rounded-full bg-neutral-700 w-16 h-16 md:w-28 md:h-28'></span>
             <span className='rounded-full bg-neutral-700 w-16 h-16 md:w-28 md:h-28'></span>
             <span className='rounded-full bg-neutral-700 w-16 h-16 md:w-28 md:h-28'></span>
             <span className='rounded-full bg-neutral-700 w-16 h-16 md:w-28 md:h-28'></span>
@@ -32,7 +33,7 @@ const Home = () => {
         {/* Promotions */}
         <div className='space-y-3'>
           <h2 className="md:text-2xl font-semibold">Promoções</h2>
-          <div className='grid grid-cols-4 md:grid-cols-8 gap-2'>
+          <div className='grid grid-cols-5 md:grid-cols-9 gap-2'>
             <span className='rounded-full bg-neutral-700 w-16 h-16 md:w-28 md:h-28'></span>
             <span className='rounded-full bg-neutral-700 w-16 h-16 md:w-28 md:h-28'></span>
           </div>

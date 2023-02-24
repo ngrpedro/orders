@@ -11,19 +11,21 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../assets/beer-logo.png'
 import { useSession } from 'next-auth/react'
+import { useShoppingCart } from '@/context/ShoppingCartContext'
 
 interface LayoutProps {
   children: ReactNode
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const { totalQuantify } = useShoppingCart()
   const router = useRouter()
 
   const { status } = useSession()
 
   return (
     <>
-      <nav className='w-full bg-neutral-800 px-8 py-3 flex items-center justify-between'>
+      <nav className='sticky top-0 w-full bg-neutral-800 px-8 py-3 flex items-center justify-between'>
         <Link href='/'>
           <Image src={logo} width={40} height={40} alt='' />
         </Link>
@@ -43,7 +45,17 @@ const Layout = ({ children }: LayoutProps) => {
               />
             </p>
           </Link>
-          <Link href={'/shoppingCart'}>
+          <Link href={'/shoppingCart'} className='relative'>
+            {totalQuantify ? (
+              <span
+                className='bg-red-600 rounded-md w-5 h-5 absolute -top-2 text-sm -right-2
+              font-semibold flex items-center justify-center'
+              >
+                {totalQuantify}
+              </span>
+            ) : (
+              ''
+            )}
             <ShoppingCart
               weight='fill'
               className={

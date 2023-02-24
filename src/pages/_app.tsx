@@ -11,13 +11,13 @@ export default function App({
 }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <Layout>
-        <ProductsProvider>
-          <ShoppingCartProvider>
+      <ShoppingCartProvider>
+        <Layout>
+          <ProductsProvider>
             <Component {...pageProps} />
-          </ShoppingCartProvider>
-        </ProductsProvider>
-      </Layout>
+          </ProductsProvider>
+        </Layout>
+      </ShoppingCartProvider>
     </SessionProvider>
   )
 }
