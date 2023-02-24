@@ -45,34 +45,34 @@ const ShoppingCart = () => {
     const { bairro, cep, complemento, numero, paymentMode, rua } = data
 
     let whatsappOrder = `
-      Novo pedido: 
+Novo pedido: 
 
-      *Endereço* 
-      Rua: ${rua}
-      Numero: ${numero}
-      Bairro : ${bairro}
-      Complemento: ${complemento}
-
-
-      *Produtos*
-     ${cartProducts.map(
-       (prod) => `
-        Nome: ${prod.name}
-        Quantidade: ${prod.quantify}
-        Preço: ${prod.price / 100},00
-        Preço total: ${prod.amount! / 100},00
-        `
-     )}
+*Endereço* 
+Rua: ${rua}
+Numero: ${numero}
+Bairro : ${bairro}
+Complemento: ${complemento}
 
 
-      *Forma de pagamento*
-      Pagamento: ${paymentMode}
+*Produtos*
+${cartProducts.map(
+  (prod) => `
+  Nome: ${prod.name}
+  Quantidade: ${prod.quantify}
+  Preço: ${prod.price / 100},00
+  Preço total: ${prod.amount! / 100},00
+  `
+)}
 
 
-      Total dos produtos: "${totalOrderAmountFormatted}*
-      Entrega: *R$3,00*
-      Total do pedido: *${totalOrderAmountFormatterdPlusTax}*
-    `
+*Forma de pagamento*
+Pagamento: ${paymentMode}
+
+
+Total dos produtos: "${totalOrderAmountFormatted}*
+Entrega: *R$3,00*
+Total do pedido: *${totalOrderAmountFormatterdPlusTax}*
+`
     const url = `https://wa.me/5518997153884?text=${encodeURI(whatsappOrder)}`
     window.open(url)
   }
