@@ -57,11 +57,11 @@ Complemento: ${complemento}
 *Produtos*
 ${cartProducts.map(
   (prod) => `
-  Nome: ${prod.name}
-  Quantidade: ${prod.quantify}
-  Preço: ${prod.price / 100},00
-  Preço total: ${prod.amount! / 100},00
-  `
+Nome: ${prod.name}
+Quantidade: ${prod.quantify}
+Preço: ${prod.price / 100},00
+Preço total: ${prod.amount! / 100},00
+`
 )}
 
 
