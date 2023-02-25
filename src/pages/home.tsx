@@ -1,14 +1,26 @@
 import ProductCard from '@/components/ProductCard'
-import { useProducts } from '@/context/ProductsContext'
-import { useShoppingCart } from '@/context/ShoppingCartContext'
+import { prisma } from '@/lib/prisma'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import React from 'react'
 
-const Home = () => {
-  const { products } = useProducts()
+interface HomePros {
+  products: {
+    id: number
+    name: string
+    price: number
+  }[]
+}
 
-  console.log(products.length)
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const products = await prisma.product.findMany()
 
+  return {
+    props: { products },
+  }
+}
+
+const Home = ({ products }: HomePros) => {
   return (
     <>
       <Head>
@@ -48,7 +60,11 @@ const Home = () => {
           {products.length > 0 ? (
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5'>
               {products.map((product) => {
-                return <ProductCard key={product.id} {...product} />
+                return (
+                  <div key={product.id}>
+                    <ProductCard {...product} />
+                  </div>
+                )
               })}
             </div>
           ) : (

@@ -2,7 +2,6 @@ import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import Layout from '@/components/layout'
-import { ProductsProvider } from '@/context/ProductsContext'
 import { ShoppingCartProvider } from '@/context/ShoppingCartContext'
 
 export default function App({
@@ -13,9 +12,7 @@ export default function App({
     <SessionProvider session={session}>
       <ShoppingCartProvider>
         <Layout>
-          <ProductsProvider>
-            <Component {...pageProps} />
-          </ProductsProvider>
+          <Component {...pageProps} />
         </Layout>
       </ShoppingCartProvider>
     </SessionProvider>
